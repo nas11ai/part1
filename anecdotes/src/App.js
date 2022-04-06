@@ -1,5 +1,13 @@
 import { useState } from 'react'
 
+const AnecdotesDisplay = ({ title, anecdote, voteNumber }) => (
+  <div>
+    <h1>{title}</h1>
+    <p>{anecdote}</p>
+    <p>{voteNumber}</p>
+  </div>
+)
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -22,14 +30,19 @@ const App = () => {
     setVote(voteCopy)
   }
 
-  console.log(vote)
+  const maxVoteAnecdote = anecdotes[vote.indexOf(Math.max(...vote))]
+  const maxVote = vote[anecdotes.indexOf(maxVoteAnecdote)]
+  const maxVoteAnecdoteDisplay = maxVote ? maxVoteAnecdote : 'no votes yet'
+  const maxVoteNumberDisplay = maxVote ? `has ${maxVote} votes` : ''
+
+  const currentVoteDisplay = `has ${vote[selected]} votes`
 
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {vote[selected]} votes</p>
+      <AnecdotesDisplay title="Anecdote of the day" anecdote={anecdotes[selected]} voteNumber={currentVoteDisplay} />
       <button onClick={handleVotes}>vote</button>
       <button onClick={handleAnecdotes}>next anecdotes</button>
+      <AnecdotesDisplay title="Anecdote with most votes" anecdote={maxVoteAnecdoteDisplay} voteNumber={maxVoteNumberDisplay} />
     </div>
   )
 }
