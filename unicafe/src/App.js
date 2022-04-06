@@ -6,18 +6,24 @@ const Button = ({ setButton, name }) => (
   </button>
 )
 
-const Statistics = ({ good, neutral, bad, all, average, positive }) => (
-  <div>
-    <StatisticsDisplay name='good' num={good} />
-    <StatisticsDisplay name='neutral' num={neutral} />
-    <StatisticsDisplay name='bad' num={bad} />
-    <StatisticsDisplay name='all' num={all} />
-    <StatisticsDisplay name='average' num={average ? average : 0} />
-    <StatisticsDisplay name='positive' num={(positive ? positive : 0) + ' %'} />
-  </div>
-)
+const Statistics = ({ good, neutral, bad, all, average, positive }) => {
+  if (good === 0 && neutral === 0 && bad === 0) {
+    return <p>no feedback given</p>
+  }
 
-const StatisticsDisplay = ({ name, num }) => <p>{name} {num}</p>
+  return (
+    <div>
+      <StatisticsLine name='good' num={good} />
+      <StatisticsLine name='neutral' num={neutral} />
+      <StatisticsLine name='bad' num={bad} />
+      <StatisticsLine name='all' num={all} />
+      <StatisticsLine name='average' num={average ? average : 0} />
+      <StatisticsLine name='positive' num={(positive ? positive : 0) + ' %'} />
+    </div>
+  )
+}
+
+const StatisticsLine = ({ name, num }) => <p>{name} {num}</p>
 
 const App = () => {
   const [good, setGood] = useState(0)
