@@ -12,18 +12,24 @@ const Statistics = ({ good, neutral, bad, all, average, positive }) => {
   }
 
   return (
-    <div>
-      <StatisticsLine name='good' num={good} />
-      <StatisticsLine name='neutral' num={neutral} />
-      <StatisticsLine name='bad' num={bad} />
-      <StatisticsLine name='all' num={all} />
-      <StatisticsLine name='average' num={average ? average : 0} />
-      <StatisticsLine name='positive' num={(positive ? positive : 0) + ' %'} />
-    </div>
+    <table>
+      <tbody>
+        <StatisticsLine name='good' num={good} />
+        <StatisticsLine name='neutral' num={neutral} />
+        <StatisticsLine name='bad' num={bad} />
+        <StatisticsLine name='all' num={all} />
+        <StatisticsLine name='average' num={average ? average : 0} />
+        <StatisticsLine name='positive' num={(positive ? positive : 0) + ' %'} /></tbody>
+    </table>
   )
 }
 
-const StatisticsLine = ({ name, num }) => <p>{name} {num}</p>
+const StatisticsLine = ({ name, num }) => (
+  <tr>
+    <td>{name}</td>
+    <td>{num}</td>
+  </tr>
+)
 
 const App = () => {
   const [good, setGood] = useState(0)
